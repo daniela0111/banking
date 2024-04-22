@@ -3,8 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { store } from './store/store'
 import { Provider } from 'react-redux'
 import MainNavigation from './screens/MainNavigation';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import TodoScreen from './todoQueries/TodoScreen';
+import React from 'react';
 
 // Create a client
 const queryClient = new QueryClient()
