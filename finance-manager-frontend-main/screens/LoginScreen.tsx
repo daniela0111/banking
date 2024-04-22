@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, Button, AppState, Text } from 'react-native';
+import { View, TextInput, AppState, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, setToken } from '../store/userSlice';
 import { AppDispatch, RootState } from '../store/store';
 import * as SecureStore from 'expo-secure-store';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from './MainNavigation';
+import { NativeBaseProvider, Button } from "native-base";
 // import * as SecureStore from 'expo-secure-store';
 
 type Props = NativeStackScreenProps<RootStackParamList>
@@ -46,8 +47,10 @@ const LoginScreen = (props: Props) => {
                 value={password}
                 onChangeText={setPassword}
             />
-            <Button title="Login" onPress={handleLogin} />
-            <Button title="Go to Signup" onPress={() => props.navigation.navigate("AuthSignup")} />
+            <NativeBaseProvider>
+                <Button title="Login" onPress={handleLogin} />
+                <Button title="Go to Signup" onPress={() => props.navigation.navigate("AuthSignup")} />
+            </NativeBaseProvider>
         </View>
     );
 };
