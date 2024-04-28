@@ -57,11 +57,19 @@ export default function App() {
 
       if (photo) {
         let sharePhoto = () => {
-
+          shareAsync(photo.uri).then(() => setPhoto(undefined));
         };
         let savePhoto = () => {
-
+          MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {setPhoto(undefined)});
         };
+
+        return (
+          <SafeAreaView style={styles.container}>
+            <Image style={styles.preview} source= {{uri : photo.uri}} />
+            <Button title='Share Photo' onPress={sharePhoto}/>
+            {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : }
+            <Button title='Discard' onPress={() =>  setPhoto(undefined)} />
+          </SafeAreaView>
       }
     }
 
@@ -75,7 +83,7 @@ export default function App() {
     );
     };
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -85,4 +93,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: '#fff',
     alignSelf: 'flex-end',
-});
+  },
+  preview: {
+    alignSelf: 'stretch'
+    flex: 1
+  }
+);
